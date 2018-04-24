@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Song</title>
+  </head>
+  <body>
+    <form action="/songs/add" method="post">
+      Title Song:<br>
+      <input type="text" name="title" value="">
+      Singer:<br>
+      <input type="text" name="singer" value="">
+      Genre:
+      <select name="genre">
+        <option value="pop">Pop</option>
+        <option value="rock">Rock</option>
+        <option value="jazz">Jazz</option>
+        <option value="blues">Blues</option>
+        <option value="rnb">R&B</option>
+      </select>
+      Link:<br>
+      <input type="text" name="link" value="">
+      Mood:<br>
+      <select name="MoodId">
+        <option value="pop">Pop</option>
+        <option value="rock">Rock</option>
+        <option value="jazz">Jazz</option>
+        <option value="blues">Blues</option>
+        <option value="rnb">R&B</option>
+      </select>
+      <input type="submit" name="submit" value="Add Song">
+    </form>
+  </body>
+</html>
