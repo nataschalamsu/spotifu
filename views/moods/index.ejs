@@ -21,7 +21,7 @@
                 <td><%= mood.id %></td>
                 <td><%= mood.mood %></td>
                 <td><%= mood.SongId %></td>
-                <td></td>
+                <td><a href="/moods/edit/<%= mood.id %>">Edit</a> | <a href="/moods/delete/<%= mood.id %>">Delete</a></td>
             </tr>
         <% }) %>
     </table>
