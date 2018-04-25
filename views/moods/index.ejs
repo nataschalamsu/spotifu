@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mood List</title>
+</head>
+<body>
+    <h4>Mood Table</h4>
+    <table>
+        <tr>
+            <td>#</td>
+            <td>Mood</td>
+            <td>SongId</td>
+            <td>Action</td>
+        </tr>
+
+        <% moods.forEach(function(mood) { %>
+            <tr>
+                <td><%= mood.id %></td>
+                <td><%= mood.mood %></td>
+                <td><%= mood.SongId %></td>
+                <td></td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+</html>
