@@ -1,6 +1,6 @@
 const app = require('express')()
 const bodyParser = require('body-parser')
-// const student = require('./routes/student.js')
+const songs = require('./routes/songs.js')
 // const teacher = require('./routes/teacher.js')
 // const subject = require('./routes/subject.js')
 
@@ -14,7 +14,11 @@ app.get('/', function(req, res, next) {
   res.render('home')
 })
 
-// app.use('/student', student)
+app.get('/register', function(req, res, next) {
+  res.render('register')
+})
+
+app.use('/songs', songs)
 // app.use('/teacher', teacher)
 // app.use('/subject', subject)
 

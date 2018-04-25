@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Register</title>
+  </head>
+  <body>
+    <%- include('./partials/header')%>
+    <div class="form">
+      <h1>Register</h1>
+      <form action="/register" method="post">
+        <p>Name:</p>
+        <input type="text" name="name" value="">
+        <p>Gender:</p>
+        <select name="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+        <p>Birthdate:</p>
+        <input type="date" name="birthdate" value="">
+        <p>Email:</p>
+        <input type="text" name="email" value="">
+        <p>Password:</p>
+        <input type="password" name="password" value=""><br>
+        <input type="submit" name="" value="Register">
+      </form>
+      <p>Already have account? <a href="/"> Login here </a></p>
+    </div>
+  </body>
+</html>

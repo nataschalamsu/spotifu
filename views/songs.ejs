@@ -2,9 +2,26 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Song List</title>
   </head>
   <body>
-
+    <%- include('./partials/header')%>
+    <h1>All Song</h1>
+    <h3><a href="/songs/add"> add new song </a></h3>
+    <table style="width:80%" border="1">
+      <tr>
+        <th>Title</th>
+        <th>Singer</th>
+        <th>Genre</th>
+        <th>Mood</th>
+      </tr>
+      <% songData.forEach(songs => { %>
+      <tr>
+        <td><%= songs.title_song %></td>
+        <td><%= songs.singer %></td>
+        <td><%= songs.genre %></td>
+      </tr>
+      <% }) %>
+    </table>
   </body>
 </html>

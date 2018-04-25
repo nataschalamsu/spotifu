@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Mood.associate = function(models) {
     // associations can be defined here
+    Mood.belongsTo(models.Song)
   };
   return Mood;
 };
