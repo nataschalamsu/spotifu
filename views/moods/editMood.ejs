@@ -8,10 +8,10 @@
 </head>
 <body>
     <table>
-        <form action="/moods/<%=  %>" method="post">
+        <form action="/moods/edit/<%= mood.id %>" method="post">
             <tr>
                 <td>Mood</td>
-                <td><input type="text" name="mood" placeholder="Insert mood"></td>
+                <td><input type="text" name="moodName" placeholder="Insert mood"></td>
             </tr>
             <tr>
                 <td>SongId</td>
