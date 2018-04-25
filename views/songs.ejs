@@ -14,11 +14,15 @@
         <th>Singer</th>
         <th>Genre</th>
         <th>Mood</th>
+        <th>Options</th>
       </tr>
       <% songData.forEach(songs => { %>
       <tr>
         <td><%= songs.title_song %></td>
         <td><%= songs.singer %></td>
+        <td><%= songs.genre %></td>
+        <td>Mood</td>
+        <td><a href="/edit/<%= songs.id %>">Edit</a> | <a href="/delete/<%= songs.id %>">Delete</a></td>
         <td><%= songs.genre %></td>
       </tr>
       <% }) %>

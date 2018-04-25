@@ -3,11 +3,7 @@ const {Song, Mood, UserSong, User} = require('../models')
 
 routes.get('/', (req, res) => {
   Song
-    .findAll({
-      include: [{
-        model: Mood
-      }]
-    })
+    .findAll()
     .then((songs) => {
       res.render('songs', {songData: songs})
     })
@@ -22,8 +18,7 @@ routes.post('/add', (req, res) => {
     title_song:req.body.title,
     singer: req.body.singer,
     genre: req.body.genre,
-    song_link: req.body.link,
-    MoodId: req.body.MoodId
+    song_link: req.body.link
   })
   .then((newSong) => {
     // console.log(newSong);
@@ -49,8 +44,7 @@ routes.post('/edit/:id', (req, res) => {
       title_song:req.body.title,
       singer: req.body.singer,
       genre: req.body.genre,
-      song_link: req.body.link,
-      MoodId: req.body.MoodId
+      song_link: req.body.link
     })
     .then(updated => {
       res.redirect('/')
@@ -64,7 +58,7 @@ routes.post('/edit/:id', (req, res) => {
   })
 })
 
-routes.get('delete/:id', (req, res) => {
+routes.get('/delete/:id', (req, res) => {
   Song.destroy({
     where: {
       id: req.params.id

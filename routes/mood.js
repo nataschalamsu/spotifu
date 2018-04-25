@@ -9,7 +9,7 @@ routes.get('/',(req,res) => {
     })
     .catch(err => {
         console.log(err);
-        
+
     })
 })
 
@@ -41,7 +41,7 @@ routes.post('/edit/:id', (req,res) => {
     Mood.update({
         mood: req.body.mood,
         SongId: req.body.SongId
-    },{ 
+    },{
         where : { id: req.params.id }
     })
     .then(editedMood => {
