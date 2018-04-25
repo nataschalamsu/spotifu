@@ -1,4 +1,7 @@
 'use strict';
+
+const bcrypt = require('bcrypt')
+
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define('User', {
     name: DataTypes.STRING,
@@ -12,9 +15,16 @@ module.exports = (sequelize, DataTypes) => {
           msg: `Error input must be email format`
         }
       }
-    }
-  },
-  password: DataTypes.STRING, {});
+    },
+    password: DataTypes.STRING,
+  }, {
+    hooks: {
+    beforeCreate: (user, options) => {
+      let hash = bcrypt.hashSync(user.password, 10);
+      user.password = hash
+    },
+  }
+});
   User.associate = function(models) {
     // associations can be defined here
     User.belongsToMany(models.Song, {through: models.UserSong})

@@ -21,7 +21,6 @@ routes.post('/add', (req, res) => {
     song_link: req.body.link
   })
   .then((newSong) => {
-    // console.log(newSong);
     res.redirect('add')
   })
   .catch((err) => {

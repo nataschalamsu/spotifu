@@ -1,27 +1,29 @@
 const routes = require('express').Router()
-const { Mood } = require('../models')
+const { Mood, Song } = require('../models')
 
 routes.get('/',(req,res) => {
 
-    Mood.findAll()
+    Mood.findAll({
+      include: [{
+        model: Song
+      }]
+    })
     .then((moods) => {
         res.render('./moods/index', { moods })
     })
     .catch(err => {
         console.log(err);
-
     })
 })
 
 //Add Mood
 routes.get('/add', (req,res) => {
-    res.render('./moods/addMood')
+  res.render('/moods/add')
 })
 
 routes.post('/add', (req,res) => {
     Mood.create({
-        mood: req.body.mood,
-        SongId: req.body.SongId
+        mood: req.body.mood
     })
     .then(newMood => {
         res.redirect('/moods')
@@ -38,29 +40,17 @@ routes.get('/edit/:id', (req,res) => {
 })
 
 routes.post('/edit/:id',(req,res) => {
-    // Mood.findById(req.params.id)
-    // .then(found => {
-    //     found.update({
-    //         mood: req.body.moodName,
-    //         SongId: req.body.SongId
-    //     })
-    //     .then(updated => {
-    //         // res.send(updated)
-    //     })
-    // })
     Mood.update({
         mood: req.body.moodName,
         SongId: req.body.SongId
     },{
         where : { id: req.params.id }
-        where: {id:req.params.id}
     })
     .then((edited) => {
         res.redirect('/moods')
     })
     .catch((err) => {
         console.log(err);
-
     })
 })
 
