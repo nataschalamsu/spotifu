@@ -1,11 +1,10 @@
 const app = require('express')()
 const bodyParser = require('body-parser')
 const songs = require('./routes/songs.js')
-// const teacher = require('./routes/teacher.js')
-// const subject = require('./routes/subject.js')
+const moods = require('./routes/mood.js')
 
 app.use(bodyParser.urlencoded({extended:false}))
-
+app.use(bodyParser.json())
 // app.locals.unassigned= require('./helpers/unassigned.js')
 
 app.set('view engine', 'ejs')
@@ -19,8 +18,7 @@ app.get('/register', function(req, res, next) {
 })
 
 app.use('/songs', songs)
-// app.use('/teacher', teacher)
-// app.use('/subject', subject)
+app.use('/moods', moods)
 
 app.listen(3000, (connect) => {
   console.log('===connected===');
