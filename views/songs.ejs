@@ -18,10 +18,14 @@
       </tr>
       <% songData.forEach(songs => { %>
       <tr>
-        <td><%= songs.title_song %></td>
+        <td><a href="<%= songs.song_link %>" target="_blank"><%= songs.title_song %></a></td>
         <td><%= songs.singer %></td>
         <td><%= songs.genre %></td>
-        <td><a href="/songs/addMood">Add Mood</a></td>
+        <td><% songs.Moods.forEach((moods, i) => { %>
+          <ul>
+            <li><%= moods.mood %></li>
+          </ul>
+        <% }) %></td>
         <td><a href="/edit/<%= songs.id %>">Edit</a> | <a href="/delete/<%= songs.id %>">Delete</a></td>
       </tr>
       <% }) %>

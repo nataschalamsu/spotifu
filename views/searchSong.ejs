@@ -12,6 +12,7 @@
         <button type="submit">Cari</button>
     </form>
 
+    <% if(songsByTitle.length !== 0) {%>
     <h5>By title</h5>
     <table>
         <% songsByTitle.forEach(function(songTitle) { %>
@@ -21,6 +22,30 @@
             </tr>
         <% }) %>
     </table>
-    
+    <% } %>
+
+    <% if(songsBySinger.length !== 0) {%>
+        <h5>By Singer</h5>
+        <table>
+            <% songsBySinger.forEach(function(songSinger) { %>
+                <tr>
+                    <td><%= songSinger.singer %></td>
+                    <td><%= songSinger.song_link %></td>
+                </tr>
+            <% }) %>
+        </table>
+    <% } %>
+
+    <% if(songsByGenre.length !== 0) {%>
+        <h5>By Genre</h5>
+        <table>
+            <% songsByGenre.forEach(function(songGenre) { %>
+                <tr>
+                    <td><%= songGenre.genre %></td>
+                    <td><%= songGenre.song_link %></td>
+                </tr>
+            <% }) %>
+        </table>
+    <% } %>
 </body>
 </html>

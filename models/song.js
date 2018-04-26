@@ -47,8 +47,8 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       })
-      .then(SongsBySinger => {
-        resolve(SongsBySinger)
+      .then(songs => {
+        resolve(songs)
       })
       .catch(err => {
         reject(err)
@@ -66,8 +66,8 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       })
-      .then(SongsByGenre => {
-        resolve(SongsByGenre)
+      .then(songs => {
+        resolve(songs)
       })
       .catch(err => {
         reject(err)

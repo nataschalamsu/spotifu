@@ -5,8 +5,13 @@ const op = Sequelize.Op
 
 routes.get('/', (req, res) => {
   Song
-    .findAll()
+    .findAll({
+      include: [{
+        model: Mood
+      }]
+    })
     .then((songs) => {
+      // console.log(songs[0].Moods.mood);
       res.render('songs', {songData: songs})
     })
 })
@@ -76,13 +81,27 @@ routes.get('/delete/:id', (req, res) => {
 //searchSong
 
 routes.get('/search', (req,res) => {
-
+  // Song.findAll({where: {singer: "adsad" OR genre: "asdasd" OR}})
   Song.getSongsByTitle(req.query.search)
     .then(songsByTitle => {
-      res.render('searchSong', { songsByTitle })
+      Song.getSongsBySinger(req.query.search)
+      .then(songsBySinger => {
+        Song.getSongsByGenre(req.query.search)
+        .then(songsByGenre => {
+          res.render('searchSong', { songsByTitle, songsBySinger, songsByGenre })
+        })
+        .catch()
+      })
+      .catch()
     })
     .catch()
-})
+
+//   Song.getSongsByTitle(req.query.search)
+//   .then(songsByTitle => {
+//     Song.getSongsBySinger(req.query.search)
+
+//   })
+// })
 
 // routes.get('/search', (req,res) => {
 
@@ -118,6 +137,6 @@ routes.get('/search', (req,res) => {
 //   .catch(err => {
 //     res.render('searchSong', { err })
 //   })
-// })
+})
 
 module.exports = routes
