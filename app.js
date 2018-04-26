@@ -2,6 +2,8 @@ const app = require('express')()
 const bodyParser = require('body-parser')
 const songs = require('./routes/songs.js')
 const moods = require('./routes/mood.js')
+const users = require('./routes/users.js')
+
 
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
@@ -19,6 +21,7 @@ app.get('/register', function(req, res, next) {
 
 app.use('/songs', songs)
 app.use('/moods', moods)
+app.use('/users', users)
 
 app.listen(3000, (connect) => {
   console.log('===connected===');

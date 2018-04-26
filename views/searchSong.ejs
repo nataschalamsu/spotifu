@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/songs/search" method="get">
+        <input type="text" name="search" placeholder="cari lagu">
+        <button type="submit">Cari</button>
+    </form>
+
+    <h5>By title</h5>
+    <table>
+        <% songsByTitle.forEach(function(songTitle) { %>
+            <tr>
+                <td><%= songTitle.title_song %></td>
+                <td><%= songTitle.song_link %></td>
+            </tr>
+        <% }) %>
+    </table>
+    
+</body>
+</html>

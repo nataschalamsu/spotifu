@@ -1,22 +1,25 @@
 const routes = require('express').Router()
-const { Mood } = require('../models')
+const { Mood, Song } = require('../models')
 
 routes.get('/',(req,res) => {
 
-    Mood.findAll()
+    Mood.findAll({
+      include: [{
+        model: Song
+      }]
+    })
     .then((moods) => {
         res.render('./moods/index', { moods })
     })
     .catch(err => {
         console.log(err);
-
     })
 })
 
 //Add Mood
 
 routes.get('/add', (req,res) => {
-    res.render('./moods/addMood')
+  res.render('./moods/addMood')
 })
 
 routes.post('/add', (req,res) => {
@@ -51,7 +54,6 @@ routes.post('/edit/:id',(req,res) => {
     })
     .catch((err) => {
         console.log(err);
-
     })
 })
 
@@ -72,5 +74,6 @@ routes.get('/delete/:id', (req,res) => {
 
     })
 })
+
 
 module.exports = routes

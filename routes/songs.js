@@ -1,6 +1,7 @@
 const routes = require('express').Router()
 const {Song, Mood, UserSong, User} = require('../models')
-// const Op = Sequelize.Op
+const { Sequelize } = require('../models')
+const op = Sequelize.Op
 
 routes.get('/', (req, res) => {
   Song
@@ -22,7 +23,6 @@ routes.post('/add', (req, res) => {
     song_link: req.body.link
   })
   .then((newSong) => {
-    // console.log(newSong);
     res.redirect('add')
   })
   .catch((err) => {
@@ -77,37 +77,47 @@ routes.get('/delete/:id', (req, res) => {
 
 routes.get('/search', (req,res) => {
 
-  Song.findAll({
-    where : {
-      title_song: {
-        [Op.like]: `%${req.body.search}`
-      }
-    }
-  })
-  .then((songsByTitle) => {
-    Song.findAll({
-      where : {
-        singer: {
-          [Op.like]: `%${req.body.search}`
-        }
-      }
+  Song.getSongsByTitle(req.query.search)
+    .then(songsByTitle => {
+      res.render('searchSong', { songsByTitle })
     })
-    .then((songsBySinger) => {
-      Song.findAll({
-        where: {
-          genre: {
-            [op.like]: `%${req.body.search}`
-          }
-        }
-      })
-      .then((songsByGenre) => {
-        res.render('/searchSong', { songsByTitle, songsBySinger, songsByGenre })
-      })
-    })
-  })
-  .catch(err => {
-    res.render('/searchSong', { err })
-  })
+    .catch()
 })
+
+// routes.get('/search', (req,res) => {
+
+//   Song.findAll({
+//     where : {
+//       title_song: {
+//         [op.like]: `%${req.query.search}%`
+//       }
+//     }
+//   })
+//   .then((songsByTitle) => {
+//     Song.findAll({
+//       where : {
+//         singer: {
+//           [op.like]: `%${req.query.search}%`
+//         }
+//       }
+//     })
+//     .then((songsBySinger) => {
+//       Song.findAll({
+//         where: {
+//           genre: {
+//             [op.like]: `%${req.query.search}%`
+//           }
+//         }
+//       })
+//       .then((songsByGenre) => {
+        
+//         res.render('searchSong', { songsByTitle, songsBySinger, songsByGenre })
+//       })
+//     })
+//   })
+//   .catch(err => {
+//     res.render('searchSong', { err })
+//   })
+// })
 
 module.exports = routes
