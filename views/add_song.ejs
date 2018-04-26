@@ -26,7 +26,9 @@
             <li><%= moods.mood %></li>
           </ul>
         <% }) %></td>
-        <td><a href="/songs/edit/<%= songs.id %>">Edit</a> | <a href="/songs/delete/<%= songs.id %>">Delete</a></td>
+        <td><form action="/addSong/<%= userNow.id %>" method="post">
+          <input type="submit" name="SongId" value="<%= songs.id %>">
+        </form> | <a href="/edit/<%= songs.id %>">Edit</a> | <a href="/delete/<%= songs.id %>">Delete</a></td>
       </tr>
       <% }) %>
     </table>

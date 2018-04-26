@@ -18,21 +18,25 @@
       </tr>
       <tr>
         <th>Birthdate</th>
-        <td><%= user.birthdate %></td>
+        <td><%= getDate (user.birthdate) %></td>
       </tr>
       <tr>
         <th>Age</th>
-        <td></td>
+        <td><%= getAge(user.birthdate) %></td>
       </tr>
     </table>
-    <table>
+    <table style="width:20%" border="1">
       <tr>
         <th>Song List</th>
-        <td>no song</td>
-        <form action="/songs" method="get">
-          <input type="submit" name="" value="Add Song">
-        </form>
       </tr>
+      <% user.Songs.forEach(songs => { %>
+      <tr>
+        <td><%= songs.title_song %></td>
+      </tr>
+      <% }) %>
     </table>
+    <form action="/addSong/<%= user.id %>" method="get">
+      <input type="submit" name="" value="Add Song">
+    </form>
   </body>
 </html>

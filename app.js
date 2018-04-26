@@ -7,22 +7,14 @@ const users = require('./routes/users.js')
 
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
-// app.locals.unassigned= require('./helpers/unassigned.js')
+app.locals.getAge = require('./helpers/getAge.js')
+app.locals.getDate = require('./helpers/getDate.js')
 
 app.set('view engine', 'ejs')
-
-// app.get('/', function(req, res, next) {
-//   res.render('login')
-// })
-
-// app.get('/register', function(req, res, next) {
-//   res.render('register')
-// })
 
 app.use('/', users)
 app.use('/songs', songs)
 app.use('/moods', moods)
-
 
 app.listen(3000, (connect) => {
   console.log('===connected===');

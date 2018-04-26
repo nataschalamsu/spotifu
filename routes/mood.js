@@ -8,7 +8,13 @@ routes.get('/',(req,res) => {
       }]
     })
     .then((moods) => {
-        res.render('./moods/index', { moods })
+      moods.forEach(mood => {
+        console.log(mood.Song.title_song);
+        // mood.Song.forEach(songs => {
+        //   console.log(songs);
+        // })
+      })
+        // res.render('./moods/index', { moods })
     })
     .catch(err => {
         res.send(err);

@@ -1,5 +1,5 @@
 const routes = require('express').Router()
-const {User, UserSong, Song} = require('../models')
+const {User, UserSong, Song, Mood} = require('../models')
 const session = require('express-session')
 const bcrypt = require('bcrypt')
 const checkLogin = require('../middlewares/checkLogin.js')
@@ -52,9 +52,17 @@ routes.post('/', (req, res) => {
 })
 
 routes.get('/profile', checkLogin, (req, res) => {
-  let id = req.session.user.id
-  User.findById(id)
+  let userId = req.session.user.id
+  User.findOne({
+    where: {
+      id: userId
+    },
+    include: [{
+      model: Song
+    }]
+  })
   .then(userLogin => {
+    // console.log(userLogin.Songs)
     res.render('profile', {user: userLogin})
   })
   .catch(err => {
@@ -66,9 +74,13 @@ routes.get('/profile', checkLogin, (req, res) => {
 routes.get('/addSong/:id', checkLogin, (req, res) => {
  User.findById(req.params.id)
  .then(user => {
-   Song.findAll()
+   Song.findAll({
+     include: [{
+       model: Mood
+     }]
+   })
    .then(songs => {
-     res.render('add_song', {userNow: user, dataSong: songs})
+     res.render('add_song', {userNow: user, songData: songs})
    })
  })
 })
@@ -76,7 +88,7 @@ routes.get('/addSong/:id', checkLogin, (req, res) => {
 routes.post('/addSong/:id', checkLogin, (req, res) => {
   UserSong.create({
     UserId: req.params.id,
-    SongId: req.body.id
+    SongId: req.body.SongId
   })
   .then(added => {
     res.redirect('/profile')
