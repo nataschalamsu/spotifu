@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
           msg: `Error input must be email format`
         }
       }
-    }
-  },
-  password: DataTypes.STRING, {});
+    },
+    password: DataTypes.STRING
+  }, {});
   User.associate = function(models) {
     // associations can be defined here
     User.belongsToMany(models.Song, {through: models.UserSong})

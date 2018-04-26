@@ -1,5 +1,6 @@
 const routes = require('express').Router()
 const {Song, Mood, UserSong, User} = require('../models')
+// const Op = Sequelize.Op
 
 routes.get('/', (req, res) => {
   Song
@@ -69,6 +70,43 @@ routes.get('/delete/:id', (req, res) => {
   })
   .catch((err) => {
     res.render('/', {err})
+  })
+})
+
+//searchSong
+
+routes.get('/search', (req,res) => {
+
+  Song.findAll({
+    where : {
+      title_song: {
+        [Op.like]: `%${req.body.search}`
+      }
+    }
+  })
+  .then((songsByTitle) => {
+    Song.findAll({
+      where : {
+        singer: {
+          [Op.like]: `%${req.body.search}`
+        }
+      }
+    })
+    .then((songsBySinger) => {
+      Song.findAll({
+        where: {
+          genre: {
+            [op.like]: `%${req.body.search}`
+          }
+        }
+      })
+      .then((songsByGenre) => {
+        res.render('/searchSong', { songsByTitle, songsBySinger, songsByGenre })
+      })
+    })
+  })
+  .catch(err => {
+    res.render('/searchSong', { err })
   })
 })
 

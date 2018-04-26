@@ -14,6 +14,7 @@ routes.get('/',(req,res) => {
 })
 
 //Add Mood
+
 routes.get('/add', (req,res) => {
     res.render('./moods/addMood')
 })
@@ -38,22 +39,12 @@ routes.get('/edit/:id', (req,res) => {
 })
 
 routes.post('/edit/:id',(req,res) => {
-    // Mood.findById(req.params.id)
-    // .then(found => {
-    //     found.update({
-    //         mood: req.body.moodName,
-    //         SongId: req.body.SongId
-    //     })
-    //     .then(updated => {
-    //         // res.send(updated)
-    //     })
-    // })
+    
     Mood.update({
         mood: req.body.moodName,
         SongId: req.body.SongId
     },{
         where : { id: req.params.id }
-        where: {id:req.params.id}
     })
     .then((edited) => {
         res.redirect('/moods')
