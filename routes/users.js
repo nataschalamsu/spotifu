@@ -20,7 +20,7 @@ routes.post('/register', (req, res) => {
     gender: req.body.gender,
     birthdate: req.body.birthdate,
     email: req.body.email,
-    password: req.body.password,
+    password: req.body.password
   })
   .then(newUser => {
     res.redirect('login')
@@ -50,6 +50,6 @@ routes.post('./login', (req, res) => {
   })
 })
 
-routes.use('/', checkLogin)
+// routes.use('/', checkLogin)
 
 module.exports = routes
