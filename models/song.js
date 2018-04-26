@@ -5,7 +5,7 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op
 
 module.exports = (sequelize, DataTypes) => {
-  
+
   var Song = sequelize.define('Song', {
     title_song: DataTypes.STRING,
     singer: DataTypes.STRING,
@@ -20,23 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     Song.hasMany(models.UserSong)
   };
 
-  // Song.getSongsByMood = function(param) {
-
-  //   return new Promise(function(resolve, reject){
-  //     Song.findAll({
-  //       include:[Mood],        
-  //     })
-  //     .then((songs) => {
-  //       resolve(songs)
-  //     })
-  //     .catch(err => {
-  //       reject(err)
-  //     })
-  //   })
-  // }
-
   Song.getSongsByTitle = function(param) {
-    
+
     return new Promise(function(resolve, reject){
       Song.findAll({
         where : {
@@ -53,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
         })
     })
   }
-  
+
   Song.getSongsBySinger = function(param) {
 
     return new Promise(function(resolve, reject){

@@ -1,7 +1,7 @@
 const routes = require('express').Router()
 const {Song, Mood, UserSong, User} = require('../models')
 const { Sequelize } = require('../models')
-const op = Sequelize.Op
+const Op = Sequelize.Op
 
 routes.get('/', (req, res) => {
   Song
@@ -80,23 +80,8 @@ routes.get('/delete/:id', (req, res) => {
 //searchSong
 
 routes.get('/search', (req,res) => {
-  Mood.getMood(req.query.search)
-  .then(songsByMood => {
-    Song.getSongsByTitle(req.query.search)
-    .then(songsByTitle => {
-      Song.getSongsBySinger(req.query.search)
-      .then(songsBySinger => {
-        Song.getSongsByGenre(req.query.search)
-        .then(songsByGenre => {
-          res.render('searchSong', { songsByMood, songsByTitle, songsBySinger, songsByGenre })
-        })
-        .catch()
-      })
-      .catch()
-    })
-    .catch()
-
-  })
+  res.render('searchSong')
 })
+
 
 module.exports = routes

@@ -16,18 +16,22 @@ module.exports = (sequelize, DataTypes) => {
     // Mood.hasMany(models.Song)
   };
 
-  Mood.prototype.getMood = function(param) {
+// { where : {mood: {[Op.like]: `%${param}%`}} }
 
-    Mood.findall({
-      include: [Song]
-    })
-    .then(songs => {
-      return songs
-    })
-    .catch(err => {
-      return err
+  Mood.getSongsByMood = function(param) {
+    return new Promise(function(resolve, reject){
+      Mood.findAll({
+        include: {
+          model: Song
+        }
+      })
+        .then(moods => {
+          resolve(moods)
+        })
+        .catch(err => {
+          reject(err)
+        })
     })
   }
-
   return Mood;
 };
