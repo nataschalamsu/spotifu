@@ -80,8 +80,34 @@ routes.get('/delete/:id', (req, res) => {
 //searchSong
 
 routes.get('/search', (req,res) => {
-  res.render('searchSong')
-})
+  // Mood.getMood(req.query.search)
+  // .then(songsByMood => {
+      Mood.findAll({
+        include: [{model: Song}],
+        where: {
+          mood: {
+            [Op.like] : `%${req.query.search}%`
+          }
+        }
+      })
+      .then(songsByMood => {
+          Song.getSongsByTitle(`${req.query.search}`)
+            .then(songsByTitle => {
+              Song.getSongsBySinger(`${req.query.search}`)
+              .then(songsBySinger => {
+                Song.getSongsByGenre(`${req.query.search}`)
+                .then(songsByGenre => {
+                  res.render( 'searchSong',{ songsByMood,songsByTitle, songsBySinger, songsByGenre} )
+                })
+                .catch()
+              })
+              .catch()
+            })
+            .catch()
+            })
+        // res.send(moods)
+      })
+// })
 
 
 module.exports = routes

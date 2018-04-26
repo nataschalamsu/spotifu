@@ -11,7 +11,17 @@
         <input type="text" name="search" placeholder="cari lagu">
         <button type="submit">Cari</button>
     </form>
-
+    <% if(songsByMood.length !== 0) { %>
+        <h5>By Mood</h5>
+        <table>
+            <% songsByMood.forEach(function(songMood) { %>
+                <tr>
+                    <td><%= songMood.mood %></td>
+                    <td><%= checkSongList(songMood.Song) %></td>
+                </tr>
+            <% }) %>
+        </table>
+    <% } %>
 
 
     <!-- <% if(songsByTitle.length !== 0) {%>
