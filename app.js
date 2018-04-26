@@ -11,17 +11,18 @@ app.use(bodyParser.json())
 
 app.set('view engine', 'ejs')
 
-app.get('/', function(req, res, next) {
-  res.render('home')
-})
+// app.get('/', function(req, res, next) {
+//   res.render('login')
+// })
 
-app.get('/register', function(req, res, next) {
-  res.render('register')
-})
+// app.get('/register', function(req, res, next) {
+//   res.render('register')
+// })
 
+app.use('/', users)
 app.use('/songs', songs)
 app.use('/moods', moods)
-app.use('/users', users)
+
 
 app.listen(3000, (connect) => {
   console.log('===connected===');

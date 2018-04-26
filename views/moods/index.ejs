@@ -7,15 +7,14 @@
     <title>Mood List</title>
 </head>
 <body>
-    <h4>Mood Table</h4>
-    <table>
+    <h1>Mood</h1>
+    <table style="width:80%" border="1">
         <tr>
-            <td>#</td>
-            <td>Mood</td>
-            <td>SongId</td>
-            <td>Action</td>
+            <th>No.</th>
+            <th>Mood</th>
+            <th>SongId</th>
+            <th>Action</th>
         </tr>
-
         <% moods.forEach(function(mood) { %>
             <tr>
                 <td><%= mood.id %></td>

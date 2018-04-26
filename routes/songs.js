@@ -3,8 +3,13 @@ const {Song, Mood, UserSong, User} = require('../models')
 
 routes.get('/', (req, res) => {
   Song
-    .findAll()
+    .findAll({
+      include: [{
+        model: Mood
+      }]
+    })
     .then((songs) => {
+      // console.log(songs[0].Moods.mood);
       res.render('songs', {songData: songs})
     })
 })
