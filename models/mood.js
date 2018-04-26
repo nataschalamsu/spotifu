@@ -17,25 +17,6 @@ module.exports = (sequelize, DataTypes) => {
     // Mood.hasMany(models.Song)
   };
 
-<<<<<<< HEAD
-// { where : {mood: {[Op.like]: `%${param}%`}} }
-
-  Mood.getSongsByMood = function(param) {
-    return new Promise(function(resolve, reject){
-      Mood.findAll({
-        include: {
-          model: Song
-        }
-      })
-        .then(moods => {
-          resolve(moods)
-        })
-        .catch(err => {
-          reject(err)
-        })
-    })
-  }
-=======
   // Mood.prototype.getMood = function(param) {
 
   //   Mood.findall({
@@ -69,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
   // }
 
   // Song.getSongsByTitle = function(param) {
-    
+
   //   return new Promise(function(resolve, reject){
   //     Song.findAll({
   //       where : {
@@ -87,6 +68,5 @@ module.exports = (sequelize, DataTypes) => {
   //   })
   // }
 
->>>>>>> eb6cbdd8d74601775c332eb30baf7b90e9f2f41e
   return Mood;
 };

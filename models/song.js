@@ -20,13 +20,13 @@ module.exports = (sequelize, DataTypes) => {
     Song.hasMany(models.UserSong)
   };
 
-  Song.getSongsByTitle = function(param) {
+  Song.prototype.getSongsByTitle = function(param) {
 
     return new Promise(function(resolve, reject){
       Song.findAll({
         where : {
           title_song: {
-            [Op.like]: `%${param}%`
+            [Op.iLike]: `%${param}%`
           }
         }
       })
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       Song.findAll({
         where: {
           singer: {
-            [Op.like] : `%${param}%`
+            [Op.iLike] : `%${param}%`
           }
         }
       })
@@ -64,7 +64,7 @@ module.exports = (sequelize, DataTypes) => {
       Song.findAll({
         where: {
           genre: {
-            [Op.like] : `%${param}%`
+            [Op.iLike] : `%${param}%`
           }
         }
       })

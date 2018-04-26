@@ -35,8 +35,9 @@
       </tr>
       <% }) %>
     </table>
-    <form action="/addSong/<%= user.id %>" method="get">
+    <form action="/songs/search" method="get">
       <input type="submit" name="" value="Add Song">
     </form>
+    <p><a href="/logout">Logout</a></p>
   </body>
 </html>

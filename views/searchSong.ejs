@@ -7,10 +7,12 @@
     <title>Document</title>
 </head>
 <body>
+  <%- include('./partials/header')%>
     <form action="/songs/search" method="get">
         <input type="text" name="search" placeholder="cari lagu">
-        <button type="submit">Cari</button>
+        <button type="submit">Search</button>
     </form>
+
     <% if(songsByMood.length !== 0) { %>
         <h5>By Mood</h5>
         <table>
@@ -18,19 +20,25 @@
                 <tr>
                     <td><%= songMood.mood %></td>
                     <td><%= checkSongList(songMood.Song) %></td>
+                    <td><%= songMood.Song.singer %></td>
+                    <td><form action="/addSong/<%= songMood.id %>" method="post">
+                      <input type="submit" name="" value="Add Song">
+                    </form></td>
                 </tr>
             <% }) %>
         </table>
     <% } %>
 
-
-    <!-- <% if(songsByTitle.length !== 0) {%>
+    <% if(songsByTitle.length !== 0) {%>
     <h5>By title</h5>
     <table>
         <% songsByTitle.forEach(function(songTitle) { %>
             <tr>
                 <td><%= songTitle.title_song %></td>
-                <td><%= songTitle.song_link %></td>
+                <td><%= songTitle.singer %></td>
+                <td><form action="/addSong/<%= songTitle.id %>" method="post">
+                  <input type="submit" name="SongId" value="Add Song">
+                </form></td>
             </tr>
         <% }) %>
     </table>
@@ -42,7 +50,10 @@
             <% songsBySinger.forEach(function(songSinger) { %>
                 <tr>
                     <td><%= songSinger.singer %></td>
-                    <td><%= songSinger.song_link %></td>
+                    <td><%= songSinger.title_song %></td>
+                    <td><form action="/addSong/<%= songSinger.id %>" method="post">
+                      <input type="submit" name="SongId"value="Add Song">
+                    </form></td>
                 </tr>
             <% }) %>
         </table>
@@ -54,10 +65,13 @@
             <% songsByGenre.forEach(function(songGenre) { %>
                 <tr>
                     <td><%= songGenre.genre %></td>
-                    <td><%= songGenre.song_link %></td>
+                    <td><%= songGenre.title_song %></td>
+                    <td><form action="/addSong/<%= songGenre.id %>" method="post">
+                      <input type="submit" name="SongId" value="Add Song">
+                    </form></td>
                 </tr>
             <% }) %>
         </table>
-    <% } %> -->
+    <% } %>
 </body>
 </html>

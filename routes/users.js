@@ -87,8 +87,8 @@ routes.get('/addSong/:id', checkLogin, (req, res) => {
 
 routes.post('/addSong/:id', checkLogin, (req, res) => {
   UserSong.create({
-    UserId: req.params.id,
-    SongId: req.body.SongId
+    UserId: req.session.user.id,
+    SongId: req.params.id
   })
   .then(added => {
     res.redirect('/profile')

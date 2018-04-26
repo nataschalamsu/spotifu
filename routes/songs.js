@@ -2,8 +2,10 @@ const routes = require('express').Router()
 const {Song, Mood, UserSong, User} = require('../models')
 const { Sequelize } = require('../models')
 const Op = Sequelize.Op
+const checkLogin = require('../middlewares/checkLogin.js')
+const checkUser = require('../middlewares/checkUser.js')
 
-routes.get('/', (req, res) => {
+routes.get('/', checkUser, (req, res) => {
   Song
     .findAll({
       include: [{
@@ -15,11 +17,11 @@ routes.get('/', (req, res) => {
     })
 })
 
-routes.get('/add', (req, res) => {
+routes.get('/add', checkUser,(req, res) => {
   res.render('form_song')
 })
 
-routes.post('/add', (req, res) => {
+routes.post('/add', checkUser,(req, res) => {
   Song.create({
     title_song:req.body.title,
     singer: req.body.singer,
@@ -79,25 +81,26 @@ routes.get('/delete/:id', (req, res) => {
 
 //searchSong
 
-routes.get('/search', (req,res) => {
+routes.get('/search', checkLogin, (req,res) => {
   // Mood.getMood(req.query.search)
   // .then(songsByMood => {
+  let song = new Song()
       Mood.findAll({
         include: [{model: Song}],
         where: {
           mood: {
-            [Op.like] : `%${req.query.search}%`
+            [Op.iLike] : `%${req.query.search}%`
           }
         }
       })
       .then(songsByMood => {
-          Song.getSongsByTitle(`${req.query.search}`)
+          song.getSongsByTitle(`${req.query.search}`)
             .then(songsByTitle => {
               Song.getSongsBySinger(`${req.query.search}`)
               .then(songsBySinger => {
                 Song.getSongsByGenre(`${req.query.search}`)
                 .then(songsByGenre => {
-                  res.render( 'searchSong',{ songsByMood,songsByTitle, songsBySinger, songsByGenre} )
+                  res.render( 'searchSong', { songsByMood,songsByTitle, songsBySinger, songsByGenre} )
                 })
                 .catch()
               })
