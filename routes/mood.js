@@ -22,8 +22,9 @@ routes.get('/',(req,res) => {
 })
 
 //Add Mood
+
 routes.get('/add', (req,res) => {
-  res.render('./moods/addMood.ejs')
+  res.render('./moods/addMood')
 })
 
 routes.post('/add', (req,res) => {
@@ -55,6 +56,7 @@ routes.get('/edit/:id', (req,res) => {
 })
 
 routes.post('/edit/:id',(req,res) => {
+    
     Mood.update({
         mood: req.body.moodName,
         SongId: req.body.SongId
@@ -86,5 +88,6 @@ routes.get('/delete/:id', (req,res) => {
 
     })
 })
+
 
 module.exports = routes

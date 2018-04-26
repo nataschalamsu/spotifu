@@ -4,13 +4,11 @@ const songs = require('./routes/songs.js')
 const moods = require('./routes/mood.js')
 const users = require('./routes/users.js')
 
-
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 app.locals.getAge = require('./helpers/getAge.js')
 app.locals.getDate = require('./helpers/getDate.js')
-
-app.set('view engine', 'ejs')
+app.locals.checkSongList = require('./helpers/checkSongList')
 
 app.use('/', users)
 app.use('/songs', songs)

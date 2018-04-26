@@ -16,15 +16,8 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    password: DataTypes.STRING,
-  }, {
-    hooks: {
-    beforeCreate: (user, options) => {
-      let hash = bcrypt.hashSync(user.password, 10);
-      user.password = hash
-    },
-  }
-});
+    password: DataTypes.STRING
+  }, {});
   User.associate = function(models) {
     // associations can be defined here
     User.belongsToMany(models.Song, {through: models.UserSong})
