@@ -1,10 +1,6 @@
 function checkSongList(params) {
 
-    if(typeof params !== undefined) {
-        params.forEach((param) => {
-            
-        })
-    } 
+    return params.title_song
 }
 
 module.exports = checkSongList

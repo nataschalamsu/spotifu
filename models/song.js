@@ -1,6 +1,7 @@
 'use strict';
 
 const Sequelize = require('sequelize');
+// const Mood = require('./mood')
 const Op = Sequelize.Op
 
 module.exports = (sequelize, DataTypes) => {
@@ -10,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     singer: DataTypes.STRING,
     genre: DataTypes.STRING,
     song_link: DataTypes.STRING
+    // MoodId: DataTypes.INTEGER
   }, {});
   Song.associate = function(models) {
     // associations can be defined here
@@ -17,6 +19,21 @@ module.exports = (sequelize, DataTypes) => {
     Song.belongsToMany(models.User, {through: models.UserSong})
     Song.hasMany(models.UserSong)
   };
+
+  // Song.getSongsByMood = function(param) {
+
+  //   return new Promise(function(resolve, reject){
+  //     Song.findAll({
+  //       include:[Mood],        
+  //     })
+  //     .then((songs) => {
+  //       resolve(songs)
+  //     })
+  //     .catch(err => {
+  //       reject(err)
+  //     })
+  //   })
+  // }
 
   Song.getSongsByTitle = function(param) {
     
@@ -36,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
         })
     })
   }
-
+  
   Song.getSongsBySinger = function(param) {
 
     return new Promise(function(resolve, reject){
