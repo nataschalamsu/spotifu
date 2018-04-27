@@ -1,13 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+        <title>Register</title>
+    </head>
 <body>
-  <%- include('./partials/header')%>
+    <div class="container">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ecf0f1" id="navbar">
+            <div class="container">
+                <a class="navbar-brand" href="#"><i class="fas fa-volume-down"></i> &nbsp; Spotifu</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+                        </li>
+                </div>
+            </div>
+            </nav>
+        </header>
+
+        <footer>
+            <div class="fixed-bottom">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
+                <div class="container">
+                    <ul class="ml-auto">
+                    <label style="color: #ecf0f1 ">&copy; Spotifu Team</label>
+                    </ul>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </nav>
+            </div>
+        </footer>
+    </div>
+  <!-- <%- include('./partials/header')%>
     <form action="/songs/search" method="get">
         <input type="text" name="search" placeholder="cari lagu">
         <button type="submit">Search</button>
@@ -72,6 +109,6 @@
                 </tr>
             <% }) %>
         </table>
-    <% } %>
+    <% } %> -->
 </body>
 </html>
