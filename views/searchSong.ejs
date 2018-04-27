@@ -19,7 +19,7 @@
             <% songsByMood.forEach(function(songMood) { %>
                 <tr>
                     <td><%= songMood.mood %></td>
-                    <td><%= checkSongList(songMood.Song) %></td>
+                    <td><a href="<%= songMood.songlink %>"><%= checkSongList(songMood.Song) %></a></td>
                     <td><%= songMood.Song.singer %></td>
                     <td><form action="/addSong/<%= songMood.id %>" method="post">
                       <input type="submit" name="" value="Add Song">
@@ -34,7 +34,7 @@
     <table>
         <% songsByTitle.forEach(function(songTitle) { %>
             <tr>
-                <td><%= songTitle.title_song %></td>
+                <td><a href="<%= songTitle.songlink %>"><%= songTitle.title_song %></a></td>
                 <td><%= songTitle.singer %></td>
                 <td><form action="/addSong/<%= songTitle.id %>" method="post">
                   <input type="submit" name="SongId" value="Add Song">
@@ -50,7 +50,7 @@
             <% songsBySinger.forEach(function(songSinger) { %>
                 <tr>
                     <td><%= songSinger.singer %></td>
-                    <td><%= songSinger.title_song %></td>
+                    <td><a href="<%= songSinger.songlink %>"><%= songSinger.title_song %></a></td>
                     <td><form action="/addSong/<%= songSinger.id %>" method="post">
                       <input type="submit" name="SongId"value="Add Song">
                     </form></td>
@@ -65,7 +65,7 @@
             <% songsByGenre.forEach(function(songGenre) { %>
                 <tr>
                     <td><%= songGenre.genre %></td>
-                    <td><%= songGenre.title_song %></td>
+                    <td><a href="<%= songGenre.songlink %>"><%= songGenre.title_song %></a></td>
                     <td><form action="/addSong/<%= songGenre.id %>" method="post">
                       <input type="submit" name="SongId" value="Add Song">
                     </form></td>
