@@ -4,14 +4,14 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
         <title>Register</title>
     </head>
 <body>
-    <div class="container">
+
         <header>
             <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ecf0f1" id="navbar">
             <div class="container">
@@ -28,7 +28,75 @@
             </div>
             </nav>
         </header>
+        <div class="container">
+        <main>
+          <br>
+          <form action="/songs/search" method="get">
+              <input type="text" name="search" placeholder="cari lagu">
+              <button type="submit">Search</button>
+          </form>
 
+          <% if(songsByMood.length !== 0) { %>
+              <h5>By Mood</h5>
+              <table>
+                  <% songsByMood.forEach(function(songMood) { %>
+                      <tr>
+                          <td><%= songMood.mood %></td>
+                          <td><a href="<%= songMood.songlink %>"><%= checkSongList(songMood.Song) %></a></td>
+                          <td><%= songMood.Song.singer %></td>
+                          <td><form action="/addSong/<%= songMood.Song.id %>" method="post">
+                            <input type="submit" name="" value="Add Song">
+                          </form></td>
+                      </tr>
+                  <% }) %>
+              </table>
+          <% } %>
+
+          <% if(songsByTitle.length !== 0) {%>
+          <h5>By title</h5>
+          <table>
+              <% songsByTitle.forEach(function(songTitle) { %>
+                  <tr>
+                      <td><a href="<%= songTitle.songlink %>"><%= songTitle.title_song %></a></td>
+                      <td><%= songTitle.singer %></td>
+                      <td><form action="/addSong/<%= songTitle.id %>" method="post">
+                        <input type="submit" name="SongId" value="Add Song">
+                      </form></td>
+                  </tr>
+              <% }) %>
+          </table>
+          <% } %>
+
+          <% if(songsBySinger.length !== 0) {%>
+              <h5>By Singer</h5>
+              <table>
+                  <% songsBySinger.forEach(function(songSinger) { %>
+                      <tr>
+                          <td><%= songSinger.singer %></td>
+                          <td><a href="<%= songSinger.songlink %>"><%= songSinger.title_song %></a></td>
+                          <td><form action="/addSong/<%= songSinger.id %>" method="post">
+                            <input type="submit" name="SongId"value="Add Song">
+                          </form></td>
+                      </tr>
+                  <% }) %>
+              </table>
+          <% } %>
+
+          <% if(songsByGenre.length !== 0) {%>
+              <h5>By Genre</h5>
+              <table>
+                  <% songsByGenre.forEach(function(songGenre) { %>
+                      <tr>
+                          <td><%= songGenre.genre %></td>
+                          <td><a href="<%= songGenre.songlink %>"><%= songGenre.title_song %></a></td>
+                          <td><form action="/addSong/<%= songGenre.id %>" method="post">
+                            <input type="submit" name="SongId" value="Add Song">
+                          </form></td>
+                      </tr>
+                  <% }) %>
+              </table>
+          <% } %>
+        </main>
         <footer>
             <div class="fixed-bottom">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
@@ -44,71 +112,5 @@
             </div>
         </footer>
     </div>
-  <!-- <%- include('./partials/header')%>
-    <form action="/songs/search" method="get">
-        <input type="text" name="search" placeholder="cari lagu">
-        <button type="submit">Search</button>
-    </form>
-
-    <% if(songsByMood.length !== 0) { %>
-        <h5>By Mood</h5>
-        <table>
-            <% songsByMood.forEach(function(songMood) { %>
-                <tr>
-                    <td><%= songMood.mood %></td>
-                    <td><a href="<%= songMood.songlink %>"><%= checkSongList(songMood.Song) %></a></td>
-                    <td><%= songMood.Song.singer %></td>
-                    <td><form action="/addSong/<%= songMood.id %>" method="post">
-                      <input type="submit" name="" value="Add Song">
-                    </form></td>
-                </tr>
-            <% }) %>
-        </table>
-    <% } %>
-
-    <% if(songsByTitle.length !== 0) {%>
-    <h5>By title</h5>
-    <table>
-        <% songsByTitle.forEach(function(songTitle) { %>
-            <tr>
-                <td><a href="<%= songTitle.songlink %>"><%= songTitle.title_song %></a></td>
-                <td><%= songTitle.singer %></td>
-                <td><form action="/addSong/<%= songTitle.id %>" method="post">
-                  <input type="submit" name="SongId" value="Add Song">
-                </form></td>
-            </tr>
-        <% }) %>
-    </table>
-    <% } %>
-
-    <% if(songsBySinger.length !== 0) {%>
-        <h5>By Singer</h5>
-        <table>
-            <% songsBySinger.forEach(function(songSinger) { %>
-                <tr>
-                    <td><%= songSinger.singer %></td>
-                    <td><a href="<%= songSinger.songlink %>"><%= songSinger.title_song %></a></td>
-                    <td><form action="/addSong/<%= songSinger.id %>" method="post">
-                      <input type="submit" name="SongId"value="Add Song">
-                    </form></td>
-                </tr>
-            <% }) %>
-        </table>
-    <% } %>
-
-    <% if(songsByGenre.length !== 0) {%>
-        <h5>By Genre</h5>
-        <table>
-            <% songsByGenre.forEach(function(songGenre) { %>
-                <tr>
-                    <td><%= songGenre.genre %></td>
-                    <td><a href="<%= songGenre.songlink %>"><%= songGenre.title_song %></a></td>
-                    <td><form action="/addSong/<%= songGenre.id %>" method="post">
-                      <input type="submit" name="SongId" value="Add Song">
-                    </form></td>
-                </tr>
-            <% }) %>
-        </table>
-    <% } %> -->
 </body>
 </html>

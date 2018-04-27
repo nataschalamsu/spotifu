@@ -37,13 +37,13 @@ routes.post('/add', checkUser,(req, res) => {
 })
 
 routes.get('/edit/:id', (req, res) => {
-  Song.findById({
+  Song.findOne({
     where: {
       id: req.params.id
     }
   })
-  .then(songs => {
-    res.render('edit_song', {songs})
+  .then(song => {
+    res.render('edit_song', {songs: song})
   })
   .catch((err) => {
     res.send(err)
@@ -51,7 +51,7 @@ routes.get('/edit/:id', (req, res) => {
 })
 
 routes.post('/edit/:id', (req, res) => {
-  Song.findById({
+  Song.findOne({
     where: {
       id: req.params.id
     }
@@ -92,8 +92,6 @@ routes.get('/delete/:id', (req, res) => {
 //searchSong
 
 routes.get('/search', checkLogin, (req,res) => {
-  // Mood.getMood(req.query.search)
-  // .then(songsByMood => {
   let song = new Song()
       Mood.findAll({
         include: [{model: Song}],
@@ -110,6 +108,7 @@ routes.get('/search', checkLogin, (req,res) => {
               .then(songsBySinger => {
                 Song.getSongsByGenre(`${req.query.search}`)
                 .then(songsByGenre => {
+                  console.log(songsByMood);
                   res.render( 'searchSong', { songsByMood,songsByTitle, songsBySinger, songsByGenre} )
                 })
                 .catch()

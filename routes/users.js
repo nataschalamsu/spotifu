@@ -62,7 +62,7 @@ routes.get('/profile', checkLogin, (req, res) => {
     }]
   })
   .then(userLogin => {
-    // console.log(userLogin.Songs)
+    console.log(userLogin)
     res.render('profile', {user: userLogin})
   })
   .catch(err => {
@@ -71,19 +71,19 @@ routes.get('/profile', checkLogin, (req, res) => {
 })
 // routes.use('/', checkLogin)
 
-routes.get('/addSong/:id', checkLogin, (req, res) => {
- User.findById(req.params.id)
- .then(user => {
-   Song.findAll({
-     include: [{
-       model: Mood
-     }]
-   })
-   .then(songs => {
-     res.render('add_song', {userNow: user, songData: songs})
-   })
- })
-})
+// routes.get('/addSong/:id', checkLogin, (req, res) => {
+//  User.findById(req.params.id)
+//  .then(user => {
+//    Song.findAll({
+//      include: [{
+//        model: Mood
+//      }]
+//    })
+//    .then(songs => {
+//      res.render('add_song', {userNow: user, songData: songs})
+//    })
+//  })
+// })
 
 routes.post('/addSong/:id', checkLogin, (req, res) => {
   UserSong.create({
@@ -96,6 +96,28 @@ routes.post('/addSong/:id', checkLogin, (req, res) => {
   .catch((err) => {
     res.send(err)
   })
+})
+
+routes.post('/deleteSong/:id', checkLogin, (req, res) => {
+  UserSong.find({
+    where: {
+      UserId: req.session.user.id,
+      SongId: req.params.id
+    }
+  })
+  .then(found => {
+    found.destroy({
+      UserId: req.session.user.id,
+      SongId: req.params.id
+    })
+    .then(added => {
+      res.redirect('/profile')
+    })
+    .catch((err) => {
+      res.send(err)
+    })
+  })
+
 })
 
 routes.get('/logout', (req, res) => {

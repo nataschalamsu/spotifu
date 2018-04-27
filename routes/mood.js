@@ -8,13 +8,7 @@ routes.get('/',(req,res) => {
       }]
     })
     .then((moods) => {
-      moods.forEach(mood => {
-        console.log(mood.Song.title_song);
-        // mood.Song.forEach(songs => {
-        //   console.log(songs);
-        // })
-      })
-        // res.render('./moods/index', { moods })
+        res.render('./moods/index', { moods })
     })
     .catch(err => {
         res.send(err);
@@ -56,7 +50,7 @@ routes.get('/edit/:id', (req,res) => {
 })
 
 routes.post('/edit/:id',(req,res) => {
-    
+
     Mood.update({
         mood: req.body.moodName,
         SongId: req.body.SongId
@@ -85,7 +79,6 @@ routes.get('/delete/:id', (req,res) => {
     })
     .catch(err => {
         console.log(err);
-
     })
 })
 

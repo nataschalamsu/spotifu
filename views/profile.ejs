@@ -64,6 +64,9 @@
           <% user.Songs.forEach(songs => { %>
             <tr>
               <td><a href="<%= songs.song_link %>"><%= songs.title_song %></a></td>
+              <td><form action="/deleteSong/<%= songs.id %>" method="post">
+                <input type="submit" name="" value="Delete">
+              </form></td>
             </tr>
           <% }) %>
         </table>
@@ -71,41 +74,6 @@
     </div>
     </div>
     </main>
-    <!-- <%- include('./partials/header')%>
-    <h2>Your Profile</h2>
-    <table>
-      <tr>
-        <th>Name:</th>
-        <td><%= user.name%></td>
-      </tr>
-      <tr>
-        <th>Gender:</th>
-        <td><%= user.gender%></td>
-      </tr>
-      <tr>
-        <th>Birthdate</th>
-        <td><%= getDate (user.birthdate) %></td>
-      </tr>
-      <tr>
-        <th>Age</th>
-        <td><%= getAge(user.birthdate) %></td>
-      </tr>
-    </table>
-    <table style="width:20%" border="1">
-      <tr>
-        <th>Song List</th>
-      </tr>
-      <% user.Songs.forEach(songs => { %>
-      <tr>
-        <td><%= songs.title_song %></td>
-      </tr>
-      <% }) %>
-    </table>
-    <form action="/songs/search" method="get">
-      <input type="submit" name="" value="Add Song">
-    </form>
-    <p><a href="/logout">Logout</a></p> -->
-
     <footer>
       <div class="fixed-bottom">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">

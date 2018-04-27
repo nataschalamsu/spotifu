@@ -1,10 +1,6 @@
 'use strict';
 
 const Sequelize = require('sequelize')
-// const Op = Sequelize.Op
-
-// const Song = require('./song')
-// console.log(Song)
 
 module.exports = (sequelize, DataTypes) => {
   var Mood = sequelize.define('Mood', {
