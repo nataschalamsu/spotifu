@@ -37,7 +37,17 @@ routes.post('/add', checkUser,(req, res) => {
 })
 
 routes.get('/edit/:id', (req, res) => {
-  res.render('edit_song')
+  Song.findById({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(songs => {
+    res.render('edit_song', {songs})
+  })
+  .catch((err) => {
+    res.send(err)
+  })
 })
 
 routes.post('/edit/:id', (req, res) => {

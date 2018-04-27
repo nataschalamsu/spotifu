@@ -6,12 +6,12 @@
   </head>
   <body>
     <%- include('./partials/header')%>
-    <h1>Add New Song</h1>
+    <h1>Edit Song</h1>
     <form action="/songs/add" method="post">
       Title Song:<br>
-      <input type="text" name="title" value=""><br>
+      <input type="text" name="title" value="<%= songs.title_song%>"><br>
       Singer:<br>
-      <input type="text" name="singer" value=""><br>
+      <input type="text" name="singer" value="<%= songs.singer%>"><br>
       Genre:<br>
       <select name="genre">
         <option value="pop">Pop</option>
@@ -21,7 +21,7 @@
         <option value="rnb">R&B</option>
       </select><br>
       Link:<br>
-      <input type="text" name="link" value=""><br>
+      <input type="text" name="link" value="<%= songs.song_link%>"><br>
       <input type="submit" name="submit" value="Add Song">
     </form>
   </body>
